@@ -1,13 +1,8 @@
+import os
 from PIL import Image
 
 
 
-# Import the image
-input_img = Image.open("input_img.png")
-
-
-
-# Find the coordinate with the first non-white pixel starting from all four sides
 def get_left(img, width, height):
 
     pixel_found = False
@@ -102,19 +97,30 @@ def get_coordinates(img):
     return coordinates
 
 
-crop_coordinates = get_coordinates(input_img)
+def crop_image(img_name):
 
+    input_img = Image.open("./input/"+img_name)
+    crop_coordinates = get_coordinates(input_img)
 
-
-# Crop the picture using the coordinates found
-output_img = input_img.crop((
+    output_img = input_img.crop((
         crop_coordinates[0], 
         crop_coordinates[1], 
         crop_coordinates[2], 
         crop_coordinates[3]
     ))
+    output_img.save("./output/"+img_name)
+
+
+def crop_batch(path):
+
+    for root, dirs, files in os.walk(path):
+        if len(files)>0:
+            for img_filename in files:
+                print("Cropping...:", img_filename)
+                crop_image(img_filename)
+        else:
+            print("No files found")
 
 
 
-# Export the image
-output_img.save("output_img.png")
+crop_batch("./input/")

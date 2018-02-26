@@ -108,6 +108,8 @@ def crop_image(img_name):
         crop_coordinates[2], 
         crop_coordinates[3]
     ))
+    if not os.path.exists("./output/"):
+        os.makedirs("./output/")
     output_img.save("./output/"+img_name)
 
 

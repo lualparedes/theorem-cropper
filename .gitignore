@@ -1,1 +1,4 @@
+input/*
 output/*
+
+!input/input_img.png

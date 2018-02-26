@@ -99,6 +99,8 @@ def get_coordinates(img):
 
 def crop_image(img_name):
 
+    if not os.path.exists("./input/"):
+        os.makedirs("./input/")
     input_img = Image.open("./input/"+img_name)
     crop_coordinates = get_coordinates(input_img)
 
